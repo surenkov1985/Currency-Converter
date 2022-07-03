@@ -9,11 +9,5 @@ import BlockContainer from "./assets/components/blockContainer"
 root.render(
 	<div className="container">
 		<BlockContainer/>
-		{/*<div className="container__title">*/}
-			{/*<button className="container__button-currency active" onClick={exchangeHandler}>Курсы валют ЦБ РФ</button>*/}
-			{/*<button className="container__button-converter" onClick={converterHandler}>Курсы валют ЦБ</button>*/}
-		{/*</div>*/}
-		{/*/!*<ExchangeList/>*!/*/}
-		{/*<Converter/>*/}
 	</div>
-)
+);

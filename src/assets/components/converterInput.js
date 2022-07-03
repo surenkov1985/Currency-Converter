@@ -3,9 +3,8 @@ import getCurrencyData from "../js/getCurrencyData";
 import BlockButton from "./blockButton"
 
 const ConverterInput = forwardRef((props, ref) => {
-	let data = getCurrencyData();
 
-	// const [input,  setInput] = useState(props.val);
+	let data = getCurrencyData();
 	const [active, setActive] = useState(false);
 	const [charCode, setCharCode] = useState(props.charCode)
 
@@ -42,8 +41,6 @@ const ConverterInput = forwardRef((props, ref) => {
 			<input type="text" className="converter__nominal" ref={ref} value={props.val} onChange={(e) => {props.onInputChange(e)}} inputMode="numeric" onFocus={props.onFocus} onBlur={props.onBlur}/>
 		</div>
 	)
-})
+});
 
 export default ConverterInput;
-
-// props.onChange()

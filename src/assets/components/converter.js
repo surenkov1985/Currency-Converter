@@ -12,19 +12,25 @@ export default function Converter(props) {
 	const [totalCurrency, setTotalCurrency] = useState("USD");
 	const [inputValue, setInputValue] = useState(1000);
 	const [totalValue, setTotalValue] = useState(getTotalPrice);
-	const [inputActive, setInputActive] = useState();
-	const [totalActive, setTotalActive] = useState();
+
 	useEffect(() => {inputRef.current.focus()}, []);
 	useEffect(()=> {setTotalValue(getTotalPrice)}, [totalCurrency]);
 	useEffect(()=> {setInputValue(getInputPrice)}, [baseCurrensy]);
 	useEffect(()=> {
+
 		if (document.activeElement === inputRef.current) {
-		setTotalValue(getTotalPrice)
-	}}, [inputValue]);
+
+			setTotalValue(getTotalPrice)
+		}
+	}, [inputValue]);
+
 	useEffect(()=> {
+
 		if (document.activeElement === totalRef.current){
-			setInputValue(getInputPrice)}
-		}, [totalValue]);
+
+			setInputValue(getInputPrice)
+		}
+	}, [totalValue]);
 
 
 	function inputValid(e) {
@@ -37,7 +43,7 @@ export default function Converter(props) {
 		}
 
 	}
-	{console.log(document.activeElement === totalRef.current)}
+
 	function totalValid(e) {
 
 		const reg = /\d*\.?\d*/;

@@ -6,10 +6,7 @@ import getCurrencyData from "../js/getCurrencyData";
 
 export default function BlockContainer() {
 
-	// let data = getCurrencyData();
 	const [data, setData] = useState(getCurrencyData)
-
-	// console.log(data)
 
 	const [converterActive, setConverterActive] = useState(false);
 	let activeBlock;

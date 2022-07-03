@@ -6,7 +6,6 @@ export default function ExchangeList(props) {
 	let data = getCurrencyData();
 	let date = new Date();
 	const today = date.toLocaleDateString();
-	console.log(data)
 
 	return (
 		<div className="container__exchange exchange">
