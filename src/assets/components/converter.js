@@ -1,83 +1,118 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useRef} from "react"
 import getCurrencyData from "../js/getCurrencyData";
 import ConverterInput from "./converterInput.js"
 
-export default function Converter() {
+export default function Converter(props) {
 
-	useEffect(() => {getPrise()}, [])
-	let data = getCurrencyData();
-	const RUB = {
-		CharCode: "RUB",
-		ID: "R00000",
-		Name: "Рубль",
-		Nominal: 1,
-		NumCode: "000",
-		Previous: 1,
-		Value: 1
-	};
-	data.unshift(RUB);
+	const inputRef = useRef();
+	const totalRef = useRef();
 
-	console.log(data)
-
+	const [data, setData] = useState(props.data);
 	const [baseCurrensy, setBaseCurrency] = useState("RUB");
 	const [totalCurrency, setTotalCurrency] = useState("USD");
 	const [inputValue, setInputValue] = useState(1000);
-	const [totalValue, setTotalValue] = useState();
-	const [inputPrice, setInputPrice] = useState();
-	const [totalPrise, setTotalPrice] = useState();
+	const [totalValue, setTotalValue] = useState(getTotalPrice);
+	const [inputActive, setInputActive] = useState();
+	const [totalActive, setTotalActive] = useState();
+	useEffect(() => {inputRef.current.focus()}, []);
+	useEffect(()=> {setTotalValue(getTotalPrice)}, [totalCurrency]);
+	useEffect(()=> {setInputValue(getInputPrice)}, [baseCurrensy]);
+	useEffect(()=> {
+		if (document.activeElement === inputRef.current) {
+		setTotalValue(getTotalPrice)
+	}}, [inputValue]);
+	useEffect(()=> {
+		if (document.activeElement === totalRef.current){
+			setInputValue(getInputPrice)}
+		}, [totalValue]);
 
 
 	function inputValid(e) {
 
-		const reg = /^\d{0,}(?:[\.\,]\d+)?$/;
+		const reg = /\d*\.?\d*/;
 
 		if (reg.test(e.target.value)) {
 
 			setInputValue(e.target.value)
 		}
+
+	}
+	{console.log(document.activeElement === totalRef.current)}
+	function totalValid(e) {
+
+		const reg = /\d*\.?\d*/;
+
+		if (reg.test(e.target.value)) {
+
+			setTotalValue(e.target.value)
+		}
 	}
 
-	function getPrise() {
+	function getInputPrice() {
 
-		// let data = getCurrencyData();
-		// const RUB = {
-		// 	CharCode: "RUB",
-		// 	ID: "R00000",
-		// 	Name: "Рубль",
-		// 	Nominal: 1,
-		// 	NumCode: "000",
-		// 	Previous: 1,
-		// 	Value: 1
-		// };
-		// data.unshift({RUB});
-		//
-		// console.log(data)
+		let basePrice;
+		let totalPrice;
+		let result;
+
 		{data.map((item) => {
-
 
 			let {CharCode, Value, Nominal} = {...item};
 
-			console.log(CharCode)
 			if (CharCode === baseCurrensy) {
 
-				setInputPrice((Value / Nominal).toFixed(4));
+				basePrice = (Value / Nominal).toFixed(4);
 			} else if (CharCode === totalCurrency) {
 
-				setTotalPrice((Value / Nominal).toFixed(4));
+				totalPrice = (Value / Nominal).toFixed(4);
 			}
 
 		})}
 
-		setTotalValue(inputPrice / totalPrise * inputValue);
+		if (baseCurrensy === totalCurrency) {
+
+			result = inputValue;
+		} else {
+
+			result = (totalPrice / basePrice * totalValue).toFixed(2)
+		}
+
+		return result;
 	}
 
+	function getTotalPrice() {
 
+		let basePrice;
+		let totalPrice;
+		let result;
 
-	console.log(inputPrice, totalPrise, totalCurrency);
+		{data.map((item) => {
+
+			let {CharCode, Value, Nominal} = {...item};
+
+			if (CharCode === baseCurrensy) {
+
+				basePrice = (Value / Nominal).toFixed(4);
+			} else if (CharCode === totalCurrency) {
+
+				totalPrice = (Value / Nominal).toFixed(4);
+			}
+
+		})}
+
+		if (baseCurrensy === totalCurrency) {
+
+			result = inputValue;
+		} else {
+
+			result = (basePrice / totalPrice * inputValue).toFixed(2)
+		}
+
+		return result;
+	}
 
 	return (
 		<div className="container__converter converter">
-			<ConverterInput val={inputValue} text="Уменя есть:" charCode={baseCurrensy} onInputChange={(e) => inputValid(e)} onCharChange={(val) => setBaseCurrency(val)} onChange={getPrise}/>
+			<ConverterInput ref={inputRef} val={inputValue} text="Уменя есть:" charCode={baseCurrensy} onInputChange={inputValid} onCharChange={(val) => setBaseCurrency(val)} />
 			<div className="converter__arrow">
 				<svg enableBackground="new 0 0 32 32" id="Layer_4" version="1.1" viewBox="0 0 32 32" space="preserve" xmlns="http://www.w3.org/2000/svg">
 					<g>
@@ -86,7 +121,7 @@ export default function Converter() {
 					</g>
 				</svg>
 			</div>
-			<ConverterInput val={totalValue} text="Хочу купить:" charCode={totalCurrency} onCharChange={(val) => setTotalCurrency(val)}/>
+			<ConverterInput ref={totalRef} val={totalValue} text="Хочу купить:" charCode={totalCurrency} onInputChange={totalValid} onCharChange={(val) => setTotalCurrency(val)}/>
 		</div>
 	)
 }

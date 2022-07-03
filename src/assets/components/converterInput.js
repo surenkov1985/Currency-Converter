@@ -1,22 +1,11 @@
-import React, {useState} from "react"
+import React, {useState, forwardRef} from "react"
 import getCurrencyData from "../js/getCurrencyData";
 import BlockButton from "./blockButton"
 
-export default function ConverterInput(props) {
-
+const ConverterInput = forwardRef((props, ref) => {
 	let data = getCurrencyData();
-	const RUB = {
-		CharCode: "RUB",
-		ID: "R00000",
-		Name: "Рубль",
-		Nominal: 1,
-		NumCode: "000",
-		Previous: 1,
-		Value: 1
-	};
-	data.unshift(RUB);
 
-	const [input,  setInput] = useState(props.val);
+	// const [input,  setInput] = useState(props.val);
 	const [active, setActive] = useState(false);
 	const [charCode, setCharCode] = useState(props.charCode)
 
@@ -50,7 +39,11 @@ export default function ConverterInput(props) {
 					})}
 				</ul>}
 			</label>
-			<input type="text" className="converter__nominal" value={props.val} onChange={(e) => {props.onInputChange(e); props.onChange()}} inputMode="numeric"/>
+			<input type="text" className="converter__nominal" ref={ref} value={props.val} onChange={(e) => {props.onInputChange(e)}} inputMode="numeric" onFocus={props.onFocus} onBlur={props.onBlur}/>
 		</div>
 	)
-}
+})
+
+export default ConverterInput;
+
+// props.onChange()

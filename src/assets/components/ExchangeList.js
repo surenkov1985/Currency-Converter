@@ -6,6 +6,7 @@ export default function ExchangeList(props) {
 	let data = getCurrencyData();
 	let date = new Date();
 	const today = date.toLocaleDateString();
+	console.log(data)
 
 	return (
 		<div className="container__exchange exchange">
@@ -27,15 +28,16 @@ export default function ExchangeList(props) {
 					const price = (Value / Nominal).toFixed(4);
 					const diff = ((Value - Previous) / Nominal).toFixed(4);
 
-					return(
-						<li className="exchange__item"  key={index}>
-							<div className="exchange__code" >{CharCode}</div>
-							<div className="exchange__currency">{Name}</div>
-							<div className="exchange__price">{price}  ₽</div>
-							<div className="exchange__diff" style={{color: (diff >0) ? "green" : "red"}}> {(diff > 0) ? "+" : "-"} {diff} ₽</div>
-						</li>
-					)
-
+					if (CharCode !== "RUB") {
+						return(
+							<li className="exchange__item"  key={index}>
+								<div className="exchange__code" >{CharCode}</div>
+								<div className="exchange__currency">{Name}</div>
+								<div className="exchange__price">{price}  ₽</div>
+								<div className="exchange__diff" style={{color: (diff >0) ? "green" : "red"}}> {(diff > 0) ? "+" : "-"} {diff} ₽</div>
+							</li>
+						)
+					}
 				})}
 			</ul>
 		</div>

@@ -2,8 +2,14 @@ import React, {useState} from "react";
 import BlockButton from "./blockButton"
 import ExchangeList from "./ExchangeList"
 import Converter from "./converter"
+import getCurrencyData from "../js/getCurrencyData";
 
 export default function BlockContainer() {
+
+	// let data = getCurrencyData();
+	const [data, setData] = useState(getCurrencyData)
+
+	// console.log(data)
 
 	const [converterActive, setConverterActive] = useState(false);
 	let activeBlock;
@@ -18,7 +24,7 @@ export default function BlockContainer() {
 	if (converterActive) {
 		activeBlock = <ExchangeList/>
 	} else {
-		activeBlock = <Converter/>
+		activeBlock = <Converter data={data}/>
 	}
 
 	return (
