@@ -1,24 +1,18 @@
-import React, {useState, forwardRef, useEffect} from "react"
-import getCurrencyData from "../js/getCurrencyData";
+import React, {useState, forwardRef} from "react"
 import BlockButton from "./blockButton"
 
 const ConverterInput = forwardRef((props, ref) => {
 
-	// let data = getCurrencyData();
 	const [data, setData] = useState(props.data);
 	const [active, setActive] = useState(false);
 	const [charCode, setCharCode] = useState()
 
-	useEffect(() => {setActive(!active);}, [props.charCode]);
-
 	function listActivate() {
 		setActive(!active);
 	}
-	console.log(active)
+
 	function itemHandler(e, val) {
 		e.stopPropagation()
-
-		// setActive(!active);
 		setCharCode(val);
 	}
 
@@ -27,7 +21,7 @@ const ConverterInput = forwardRef((props, ref) => {
 			<label className="converter__choice choice">
 				<span className="choice__title">{props.text}</span>
 				<BlockButton className="choice__exchange" onClick={listActivate} val={props.charCode}/>
-				{!active && <ul className="choice__list">
+				{active && <ul className="choice__list">
 					{data.map((item, index) => {
 
 						const {CharCode, Name} = {...item};

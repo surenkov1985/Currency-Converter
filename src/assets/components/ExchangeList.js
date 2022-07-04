@@ -1,5 +1,4 @@
-import React, {useState, useEffect, useRef} from "react"
-import getCurrencyData from "../js/getCurrencyData";
+import React, {useState, useEffect} from "react"
 import BlockButton from "./blockButton"
 
 export default function ExchangeList(props) {

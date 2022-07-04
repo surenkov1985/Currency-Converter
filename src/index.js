@@ -1,5 +1,5 @@
 import "/assets/scss/main.scss";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { createRoot } from 'react-dom/client';
 const container = document.getElementById('app');
 const root = createRoot(container);

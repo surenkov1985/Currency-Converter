@@ -130,11 +130,9 @@ body {
 }
 
 .exchange {
-	//border: 1px solid #999999;
 	border-radius: 5px;
 	height: max-content;
 	position: relative;
-
 
 	&__list {
 		display: flex;
@@ -168,10 +166,7 @@ body {
 
 		@media (max-width: 500px) {
 			grid-template-columns: 6fr 3fr 2fr;
-			//padding: 5px;
-			//font-size: 12px;
 		}
-
 	}
 
 	& .choice__title {
@@ -191,8 +186,6 @@ body {
 
 		@media (max-width: 500px) {
 			grid-template-columns: 6fr 3fr 2fr;
-			//font-size: 12px;
-			//padding: 5px;
 		}
 
 		&:hover {
@@ -236,7 +229,6 @@ body {
 
 	@media (max-width: 900px) {
 		padding: 50px;
-
 	}
 
 	&.reverse {
@@ -316,12 +308,9 @@ body {
 	align-items: center;
 	position: relative;
 
-
 	&__title {
 		font-size: 16px;
 		font-weight: 600;
-
-
 	}
 
 	&__exchange {
@@ -333,7 +322,6 @@ body {
 		transition: all 0.1s;
 
 		&:hover {
-			//opacity: 0.6;
 			color: blue;
 		}
 	}
@@ -350,10 +338,6 @@ body {
 		height: 500px;
 		overflow-Y: auto;
 		padding: 10px;
-
-		//&.active {
-		//	display: block;
-		//}
 	}
 
 	&__item {
@@ -375,9 +359,4 @@ body {
 			color: blue;
 		}
 	}
-
-	&__item-code {
-		//width: 100px;
-	}
-
 }
