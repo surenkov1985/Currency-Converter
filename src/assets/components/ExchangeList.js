@@ -86,8 +86,8 @@ export default function ExchangeList(props) {
 							<li className="exchange__item"  key={index}>
 								<div className="exchange__code" >{CharCode}</div>
 								<div className="exchange__currency">{Name}</div>
-								<div className="exchange__price">{price}</div>
-								<div className="exchange__diff" style={{color: (diff >0) ? "green" : "red"}}> {(diff > 0) ? "+" : "-"} {diff} ₽</div>
+								<div className="exchange__price">{price} {charCode}</div>
+								<div className="exchange__diff" style={{color: (diff >0) ? "green" : "red"}}> {(diff > 0) ? "+" : "-"} {diff} {charCode}</div>
 							</li>
 						)
 					}
