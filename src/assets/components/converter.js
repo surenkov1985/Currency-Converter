@@ -12,15 +12,24 @@ export default function Converter(props) {
 	const [inputValue, setInputValue] = useState(1000);
 	const [totalValue, setTotalValue] = useState(getTotalPrice);
 	const [reverse, setReverse] = useState(true);
+	const [inputText, setInputText] = useState("1 " + baseCurrency + " = " + (totalValue / inputValue).toFixed(4) + " " + totalCurrency);
+	const [totalText, setTotalText] = useState("1 " + totalCurrency + " = " + (inputValue / totalValue).toFixed(4) + " " + baseCurrency);
 
 	useEffect(() => {inputRef.current.focus()}, []);
-	useEffect(() => {setTotalValue(getTotalPrice)}, [totalCurrency, baseCurrency]);
+	useEffect(() => {
+		setTotalValue(getTotalPrice);
+		setInputText("1 " + baseCurrency + " = " + (totalValue / inputValue).toFixed(4) + " " + totalCurrency);
+		setTotalText("1 " + totalCurrency + " = " + (inputValue / totalValue).toFixed(4) + " " + baseCurrency)
+		}, [totalCurrency, baseCurrency]);
 	useEffect(() => {
 
 		if (document.activeElement === inputRef.current) {
 
 			setTotalValue(getTotalPrice)
 		}
+
+		setInputText("1 " + baseCurrency + " = " + (totalValue / inputValue).toFixed(4) + " " + totalCurrency);
+		setTotalText("1 " + totalCurrency + " = " + (inputValue / totalValue).toFixed(4) + " " + baseCurrency)
 	}, [inputValue]);
 
 	function arrowHandler() {
@@ -37,6 +46,9 @@ export default function Converter(props) {
 
 			setInputValue(getInputPrice)
 		}
+
+		setInputText("1 " + baseCurrency + " = " + (totalValue / inputValue).toFixed(4) + " " + totalCurrency);
+		setTotalText("1 " + totalCurrency + " = " + (inputValue / totalValue).toFixed(4) + " " + baseCurrency)
 	}, [totalValue]);
 
 
@@ -125,7 +137,7 @@ export default function Converter(props) {
 
 	return (
 		<div className="container__converter converter">
-			<ConverterInput data={props.data} ref={inputRef} val={inputValue} text="Уменя есть:" charCode={baseCurrency} onInputChange={inputValid} onCharChange={(val) => setBaseCurrency(val)} />
+			<ConverterInput plaseText={inputText} data={props.data} ref={inputRef} val={inputValue} text="Уменя есть:" charCode={baseCurrency} onInputChange={inputValid} onCharChange={(val) => setBaseCurrency(val)} />
 			<div className="converter__arrow" onClick={arrowHandler}>
 				<svg enableBackground="new 0 0 32 32" id="Layer_4" version="1.1" viewBox="0 0 32 32" space="preserve" xmlns="http://www.w3.org/2000/svg">
 					<g>
@@ -134,7 +146,7 @@ export default function Converter(props) {
 					</g>
 				</svg>
 			</div>
-			<ConverterInput data={props.data} ref={totalRef} val={totalValue} text="Хочу купить:" charCode={totalCurrency} onInputChange={totalValid} onCharChange={(val) => setTotalCurrency(val)}/>
+			<ConverterInput data={props.data} ref={totalRef} val={totalValue} text="Хочу купить:" plaseText={totalText} charCode={totalCurrency} onInputChange={totalValid} onCharChange={(val) => setTotalCurrency(val)}/>
 		</div>
 	)
 }
