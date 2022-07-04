@@ -127,7 +127,7 @@ export default function Converter(props) {
 
 	return (
 		<div className="container__converter converter">
-			<ConverterInput ref={inputRef} val={inputValue} text="Уменя есть:" charCode={baseCurrency} onInputChange={inputValid} onCharChange={(val) => onBaseChar(val)} />
+			<ConverterInput ref={inputRef} val={inputValue} text="Уменя есть:" charCode={baseCurrency} onInputChange={inputValid} onCharChange={(val) => setBaseCurrency(val)} />
 			<div className="converter__arrow" onClick={arrowHandler}>
 				<svg enableBackground="new 0 0 32 32" id="Layer_4" version="1.1" viewBox="0 0 32 32" space="preserve" xmlns="http://www.w3.org/2000/svg">
 					<g>
@@ -136,7 +136,7 @@ export default function Converter(props) {
 					</g>
 				</svg>
 			</div>
-			<ConverterInput ref={totalRef} val={totalValue} text="Хочу купить:" charCode={totalCurrency} onInputChange={totalValid} onCharChange={(val) => onTotalChar(val)}/>
+			<ConverterInput ref={totalRef} val={totalValue} text="Хочу купить:" charCode={totalCurrency} onInputChange={totalValid} onCharChange={(val) => setTotalCurrency(val)}/>
 		</div>
 	)
 }

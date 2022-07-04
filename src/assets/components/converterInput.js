@@ -21,7 +21,7 @@ const ConverterInput = forwardRef((props, ref) => {
 		<div className="converter__input">
 			<label htmlFor="" className="converter__choice choice">
 				<span className="choice__title">{props.text}</span>
-				<BlockButton className="choice__exchange" onClick={listActivate} val={charCode}/>
+				<BlockButton className="choice__exchange" onClick={listActivate} val={props.charCode}/>
 				{active && <ul className="choice__list">
 					{data.map((item, index) => {
 
