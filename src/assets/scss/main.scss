@@ -98,7 +98,6 @@ body {
 }
 
 .exchange {
-	//margin-top: 20px;
 	border: 1px solid #999999;
 	border-radius: 5px;
 
@@ -110,6 +109,15 @@ body {
 
 	}
 
+	&__base {
+		display: flex;
+		justify-content: flex-end;
+
+		& .choice__title {
+			font-size: 14px;
+		}
+	}
+
 	&__item_head {
 		display: grid;
 		grid-template-columns: 100px 500px 300px 300px;
@@ -117,6 +125,8 @@ body {
 		font-weight: 600;
 		padding: 10px 15px;
 		background: #C5D6D5;
+		align-items: center;
+
 	}
 
 	&__item {

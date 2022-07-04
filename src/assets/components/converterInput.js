@@ -4,7 +4,8 @@ import BlockButton from "./blockButton"
 
 const ConverterInput = forwardRef((props, ref) => {
 
-	let data = getCurrencyData();
+	// let data = getCurrencyData();
+	const [data, setData] = useState(props.data);
 	const [active, setActive] = useState(false);
 	const [charCode, setCharCode] = useState(props.charCode)
 

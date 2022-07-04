@@ -19,7 +19,7 @@ export default function BlockContainer() {
 	}
 
 	if (converterActive) {
-		activeBlock = <ExchangeList/>
+		activeBlock = <ExchangeList data={data}/>
 	} else {
 		activeBlock = <Converter data={data}/>
 	}
