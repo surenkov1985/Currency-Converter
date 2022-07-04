@@ -23,7 +23,8 @@ export default function getCurrencyData() {
 
 			fetch("https://www.cbr-xml-daily.ru/daily_json.js")
 				.then((response) => {return response.json()})
-				.then((json) => { return json; localStorage.setItem(localKey, JSON.stringify(json))})
+				.then((json) => { localStorage.setItem(localKey, JSON.stringify(json)); return json})
+				.catch((error) => console.log(error))
 		} else {
 
 			return JSON.parse(localStorage.getItem(localKey));

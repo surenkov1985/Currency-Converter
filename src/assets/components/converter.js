@@ -8,21 +8,30 @@ export default function Converter(props) {
 	const totalRef = useRef();
 
 	const [data, setData] = useState(props.data);
-	const [baseCurrensy, setBaseCurrency] = useState("RUB");
+	const [baseCurrency, setBaseCurrency] = useState("RUB");
 	const [totalCurrency, setTotalCurrency] = useState("USD");
 	const [inputValue, setInputValue] = useState(1000);
 	const [totalValue, setTotalValue] = useState(getTotalPrice);
+	const [reverse, setReverse] = useState(true);
 
 	useEffect(() => {inputRef.current.focus()}, []);
-	useEffect(()=> {setTotalValue(getTotalPrice)}, [totalCurrency]);
-	useEffect(()=> {setInputValue(getInputPrice)}, [baseCurrensy]);
-	useEffect(()=> {
+	useEffect(() => {setTotalValue(getTotalPrice)}, [totalCurrency, baseCurrency]);
+	// useEffect(() => {setInputValue(getInputPrice)}, [baseCurrensy]);
+	useEffect(() => {
 
 		if (document.activeElement === inputRef.current) {
 
 			setTotalValue(getTotalPrice)
 		}
 	}, [inputValue]);
+
+	function arrowHandler() {
+		let charInput = baseCurrency;
+		let charTotal = totalCurrency;
+
+		setTotalCurrency(charInput);
+		setBaseCurrency(charTotal);
+	}
 
 	useEffect(()=> {
 
@@ -64,17 +73,17 @@ export default function Converter(props) {
 
 			let {CharCode, Value, Nominal} = {...item};
 
-			if (CharCode === baseCurrensy) {
+			if (CharCode === baseCurrency) {
 
-				basePrice = (Value / Nominal).toFixed(4);
+				basePrice = (Value / Nominal).toFixed(2);
 			} else if (CharCode === totalCurrency) {
 
-				totalPrice = (Value / Nominal).toFixed(4);
+				totalPrice = (Value / Nominal).toFixed(2);
 			}
 
 		})}
 
-		if (baseCurrensy === totalCurrency) {
+		if (baseCurrency === totalCurrency) {
 
 			result = inputValue;
 		} else {
@@ -95,17 +104,17 @@ export default function Converter(props) {
 
 			let {CharCode, Value, Nominal} = {...item};
 
-			if (CharCode === baseCurrensy) {
+			if (CharCode === baseCurrency) {
 
-				basePrice = (Value / Nominal).toFixed(4);
+				basePrice = (Value / Nominal).toFixed(2);
 			} else if (CharCode === totalCurrency) {
 
-				totalPrice = (Value / Nominal).toFixed(4);
+				totalPrice = (Value / Nominal).toFixed(2);
 			}
 
 		})}
 
-		if (baseCurrensy === totalCurrency) {
+		if (baseCurrency === totalCurrency) {
 
 			result = inputValue;
 		} else {
@@ -118,8 +127,8 @@ export default function Converter(props) {
 
 	return (
 		<div className="container__converter converter">
-			<ConverterInput ref={inputRef} val={inputValue} text="Уменя есть:" charCode={baseCurrensy} onInputChange={inputValid} onCharChange={(val) => setBaseCurrency(val)} />
-			<div className="converter__arrow">
+			<ConverterInput ref={inputRef} val={inputValue} text="Уменя есть:" charCode={baseCurrency} onInputChange={inputValid} onCharChange={(val) => onBaseChar(val)} />
+			<div className="converter__arrow" onClick={arrowHandler}>
 				<svg enableBackground="new 0 0 32 32" id="Layer_4" version="1.1" viewBox="0 0 32 32" space="preserve" xmlns="http://www.w3.org/2000/svg">
 					<g>
 						<polyline fill="none" points="5,9 13,1 13,32" stroke="#000000" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="2"/>
@@ -127,7 +136,7 @@ export default function Converter(props) {
 					</g>
 				</svg>
 			</div>
-			<ConverterInput ref={totalRef} val={totalValue} text="Хочу купить:" charCode={totalCurrency} onInputChange={totalValid} onCharChange={(val) => setTotalCurrency(val)}/>
+			<ConverterInput ref={totalRef} val={totalValue} text="Хочу купить:" charCode={totalCurrency} onInputChange={totalValid} onCharChange={(val) => onTotalChar(val)}/>
 		</div>
 	)
 }
