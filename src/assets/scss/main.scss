@@ -1,4 +1,6 @@
 @import "../fonts/fonts.scss";
+@import "exchange";
+@import "converter";
 
 * {
 	margin: 0;
@@ -44,80 +46,9 @@ body {
 
 	&__title {
 		display: flex;
-		align-items: center;
 		padding: 0 15px;
 		column-gap: 10px;
 		align-items: flex-end;
-	}
-
-	&__button-currency {
-		font-size: 20px;
-		min-width: 150px;
-		max-width: 350px;
-		min-height: 50px;
-		font-weight: 600;
-		padding: 10px 15px;
-		cursor: pointer;
-		border: 1px solid #999999;
-		border-radius: 3px 3px 0 0;
-		border-bottom: none;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		transition: all 0.1s;
-
-		&:hover {
-			background: rgba(#7EB4D2, 0.2);
-		}
-
-		&.active {
-			background: #d1d1d1;
-			cursor: default;
-
-			&:hover {
-				background: #d1d1d1;
-			}
-		}
-
-		@media (max-width: 760px) {
-			font-size: 16px;
-			padding: 10px 10px;
-		}
-	}
-
-	&__button-converter {
-		font-size: 20px;
-		min-width: 150px;
-		max-width: 350px;
-		min-height: 50px;
-		font-weight: 600;
-		padding: 10px 15px;
-		cursor: pointer;
-		border: 1px solid #999999;
-		border-bottom: none;
-		border-radius: 3px 3px 0 0;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		transition: all 0.1s;
-
-		&:hover {
-			background: rgba(#7EB4D2, 0.2);
-		}
-
-		&.active {
-			background: #d1d1d1;
-			cursor: default;
-
-			&:hover {
-				background: #d1d1d1;
-			}
-		}
-
-		@media (max-width: 760px) {
-			font-size: 16px;
-			padding: 10px 10px;
-		}
 	}
 
 	&__scroll{
@@ -129,177 +60,38 @@ body {
 	}
 }
 
-.exchange {
-	border-radius: 5px;
-	height: max-content;
-	position: relative;
-
-	&__list {
-		display: flex;
-		flex-direction: column;
-		row-gap: 5px;
-		height: max-content;
-		position: relative;
-	}
-
-	&__base {
-		display: flex;
-		justify-content: flex-end;
-
-		& .choice__title {
-			font-size: 14px;
-		}
-	}
-
-	&__item_head {
-		display: grid;
-		width: 100%;
-		grid-template-columns: 1fr 5fr 3fr 3fr;
-		grid-column-gap: 10px;
-		font-size: 14px;
-		font-weight: 600;
-		padding: 10px 15px;
-		background: #C5D6D5;
-		align-items: center;
-		position: sticky;
-		top: 0px;
-
-		@media (max-width: 500px) {
-			grid-template-columns: 6fr 3fr 2fr;
-		}
-	}
-
-	& .choice__title {
-		@media (max-width: 650px) {
-			display: none;
-		}
-	}
-
-	&__item {
-		display: grid;
-		grid-template-columns: 1fr 5fr 3fr 3fr;
-		grid-column-gap: 10px;
-		font-size: 14px;
-		font-weight: 500;
-		padding: 10px 15px;
-		transition: all 0.1s;
-
-		@media (max-width: 500px) {
-			grid-template-columns: 6fr 3fr 2fr;
-		}
-
-		&:hover {
-			background: rgba(#C8D2D1, 0.3);
-		}
-
-		& .exchange__code {
-			font-weight: 600;
-		}
-
-		& .exchange__currency {
-			font-weight: 600;
-		}
-	}
-
-	&__diff {
-		font-size: 12px;
-		font-weight: 600;
-
-		@media (max-width: 500px) {
-			font-size: 10px;
-		}
-	}
-
-	&__code {
-
-		@media (max-width: 500px) {
-			display: none;
-		}
-	}
-}
-
-.converter {
+.btn {
+	font-size: 20px;
+	min-width: 150px;
+	max-width: 350px;
+	min-height: 50px;
+	font-weight: 600;
+	padding: 10px 15px;
+	cursor: pointer;
 	border: 1px solid #999999;
-	border-radius: 5px;
-	padding: 70px;
-	background: rgba(#7EB4D2, 0.1);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	border-bottom: none;
+	border-radius: 3px 3px 0 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	transition: all 0.1s;
 
-	@media (max-width: 900px) {
-		padding: 50px;
+	&:hover {
+		background: rgba(#7EB4D2, 0.2);
 	}
 
-	&.reverse {
-		flex-direction: column-reverse;
-	}
-
-	&__input {
-		width: 800px;
-		padding: 30px 50px;
-		display: flex;
-		flex-direction: column;
-
-		@media (max-width: 900px) {
-			width: 100%;
-			padding: 30px 0;
-		}
-	}
-
-	&__total {
-		width: 800px;
-		padding: 30px 50px;
-		display: flex;
-		flex-direction: column;
-
-		@media (max-width: 900px) {
-			width: 100%;
-			padding: 30px 0;
-		}
-	}
-
-	&__arrow {
-		display: flex;
-		width: 50px;
-		height: 50px;
-		align-content: center;
-		justify-content: center;
-		cursor: pointer;
-		transition: all 0.1s;
-
-		& > svg {
-			width: 30px;
-		}
+	&.active {
+		background: #d1d1d1;
+		cursor: default;
 
 		&:hover {
-			opacity: 0.6;
+			background: #d1d1d1;
 		}
 	}
 
-	&__input-block {
-		border: 1px solid #999999;
-		border-radius: 5px;
-		background: #FFFFFF;
-	}
-
-	&__nominal {
-		border-radius: 5px;
-		width: 100%;
-		background: #FFFFFF;
-		min-height: 80px;
-		padding: 10px 15px;
-		font-size: 30px;
-		font-weight: 300;
-
-		&:focus {
-			outline: none;
-		}
-	}
-
-	&__price {
-		padding: 10px 15px;
-		font-size: 14px;
+	@media (max-width: 760px) {
+		font-size: 16px;
+		padding: 10px 10px;
 	}
 }
 .choice {

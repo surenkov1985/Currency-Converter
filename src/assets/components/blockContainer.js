@@ -27,8 +27,8 @@ export default function BlockContainer() {
 	return (
 		<>
 			<div className="container__title">
-				<BlockButton className="container__button-currency" onClick={converterHandler} val="Курсы валют ЦБ РФ"/>
-				<BlockButton className="container__button-converter active" onClick={converterHandler} val="Конвертер валют"/>
+				<BlockButton className="container__button-currency btn" onClick={converterHandler} val="Курсы валют ЦБ РФ"/>
+				<BlockButton className="container__button-converter btn active" onClick={converterHandler} val="Конвертер валют"/>
 			</div>
 			{activeBlock}
 		</>
